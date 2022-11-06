@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct Section {
     let letter : String
@@ -14,6 +15,7 @@ struct Section {
 
 class UserListViewModel {
     let apiService: APIServiceProtocol
+   
     
     private var users: [User] = [User]()
     var allData : [String : [User]] =  [ : ]
@@ -72,11 +74,35 @@ class UserListViewModel {
                 self?.alertMessage = error.localizedDescription
             } else {
                 self?.isLoading = false
+                let realm = try! Realm()
+                do {
+                    try realm.write {
+                        if !realm.isEmpty {
+                            realm.deleteAll()
+                        }
+                        realm.add(routeDatas)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
                 self?.processFetchedRoutes(users: routeDatas, complete: { allListData, listSections  in
                     self?.cellViewModels = allListData
                     self?.sections = listSections
                 })
             }
+        }
+    }
+    
+    func loadFromDb() {
+        let realm = try! Realm()
+        let users = realm.objects(User.self)
+        if !users.isEmpty {
+            self.processFetchedRoutes(users: users.sorted(), complete: { allListData, listSections  in
+                self.cellViewModels = allListData
+                self.sections = listSections
+            })
+        } else {
+            self.initFetch()
         }
     }
     
@@ -86,7 +112,7 @@ class UserListViewModel {
     }
     
     func createCellViewModel( user: User ) -> UserListCellViewModel {
-        return UserListCellViewModel(user: user, name: user.name, avatar_url: user.avatarUrl)
+        return UserListCellViewModel(user: user, name: user.name, avatar_url: user.avatarUrl, id: user.id)
     }
     
     
@@ -128,4 +154,5 @@ struct UserListCellViewModel {
     let user: User
     let name: String
     let avatar_url: String
+    let id: Int
 }

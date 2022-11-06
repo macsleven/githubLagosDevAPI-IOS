@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class UserListVC: UIViewController {
 
     var activityView = UIActivityIndicatorView()
     private let refreshControl = UIRefreshControl()
-    
+   // var realm: Realm!
+    var users: Results<User>!
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
@@ -28,12 +30,20 @@ class UserListVC: UIViewController {
         super.loadView()
         self.view.backgroundColor = .white
         safeArea = view.layoutMarginsGuide
+
         // Init the static view
         initView()
         
         // init view model
         initVM()
     }
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        let realm = RealmService.shared.realm
+//        self.users = realm.objects(User.self)
+//        print(Realm.Configuration.defaultConfiguration)
+//    }
     
     func showActivityIndicatory() {
         activityView = UIActivityIndicatorView(style: .medium)
@@ -103,7 +113,8 @@ class UserListVC: UIViewController {
             }
         }
         
-        viewModel.initFetch()
+        viewModel.loadFromDb()
+        
     }
     
     func showAlert( _ message: String ) {
@@ -121,7 +132,7 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource {
         guard let customCell = cell as? UserTableViewCell else { fatalError("Unable to dequeue expected cell type: RouteTableViewCell") }
         
         let cellVM = viewModel.getCellViewModel(section: viewModel.sectionLetters, listsection: indexPath.section, row: indexPath.row )
-        customCell.setupView(name: cellVM.name, url: cellVM.avatar_url)
+        customCell.setupView(name: cellVM.name, url: cellVM.avatar_url, id: "\(cellVM.id)")
         return cell
     }
     

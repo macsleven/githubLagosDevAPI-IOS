@@ -6,29 +6,39 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct User: Codable, Comparable {
+final class User: Object, Codable, Comparable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     static func < (lhs: User, rhs: User) -> Bool {
         lhs.name < rhs.name
     }
 
-    let id: Int
-    let name: String
-    let avatarUrl: String
-    let gravatar_id: String
-    let url : String
-    let html_url : String
-    let followers_url: String
-    let following_url: String
-    let gists_url : String
-    let starred_url : String
-    let subscriptions_url: String
-    let organizations_url: String
-    let repos_url : String
-    let events_url : String
-    let received_events_url : String
-    let type : String
-    let site_admin : Bool
+    @objc dynamic var id: Int
+    @objc dynamic var name: String
+    @objc dynamic var avatarUrl: String
+    @objc dynamic var gravatar_id: String
+    @objc dynamic var url : String
+    @objc dynamic var html_url : String
+    @objc dynamic var followers_url: String
+    @objc dynamic var following_url: String
+    @objc dynamic var gists_url : String
+    @objc dynamic var starred_url : String
+    @objc dynamic var subscriptions_url: String
+    @objc dynamic var organizations_url: String
+    @objc dynamic var repos_url : String
+    @objc dynamic var events_url : String
+    @objc dynamic var received_events_url : String
+    @objc dynamic var type : String
+    @objc dynamic var site_admin : Bool
+    @objc dynamic var favorite  = false
+    
+    override static func primaryKey() -> String? {
+            return "id"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id

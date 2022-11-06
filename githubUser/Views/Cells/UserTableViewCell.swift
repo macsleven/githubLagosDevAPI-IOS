@@ -75,22 +75,27 @@ class UserTableViewCell: UITableViewCell {
     }
     
     
-    func setupView(name: String , url: String) {
+    func setupView(name: String , url: String, id: String) {
         self.name.text = name
         self.avatarUrl.image = UIImage(named: "defaultImg")
-        self.avatarUrl.downloadImageFrom(link: url, contentMode: UIView.ContentMode.scaleAspectFit)
+        self.avatarUrl.image = PhotoTool.getImage(Name: id)
+        if self.avatarUrl.image == nil {
+            self.avatarUrl.downloadImageFrom(link: url, contentMode: UIView.ContentMode.scaleAspectFit, id: id)
+        }
     }
-
 }
 
 extension UIImageView {
-    func downloadImageFrom(link:String, contentMode: UIView.ContentMode) {
+    func downloadImageFrom(link:String, contentMode: UIView.ContentMode, id: String) {
         URLSession.shared.dataTask( with: NSURL(string:link)! as URL, completionHandler: {
             (data, response, error) -> Void in
             DispatchQueue.main.async {
                 self.contentMode =  contentMode
                 if let data = data {
-                    self.image = UIImage(data: data)
+                    if let img: UIImage = UIImage(data: data){
+                        PhotoTool.saveImageDocumentDirectory(image: img, Name: id)
+                        self.image = img
+                }
                 }
             }
         }).resume()
