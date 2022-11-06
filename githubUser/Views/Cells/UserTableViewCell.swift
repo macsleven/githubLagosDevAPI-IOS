@@ -78,6 +78,21 @@ class UserTableViewCell: UITableViewCell {
     func setupView(name: String , url: String) {
         self.name.text = name
         self.avatarUrl.image = UIImage(named: "defaultImg")
+        self.avatarUrl.downloadImageFrom(link: url, contentMode: UIView.ContentMode.scaleAspectFit)
     }
 
+}
+
+extension UIImageView {
+    func downloadImageFrom(link:String, contentMode: UIView.ContentMode) {
+        URLSession.shared.dataTask( with: NSURL(string:link)! as URL, completionHandler: {
+            (data, response, error) -> Void in
+            DispatchQueue.main.async {
+                self.contentMode =  contentMode
+                if let data = data {
+                    self.image = UIImage(data: data)
+                }
+            }
+        }).resume()
+    }
 }
