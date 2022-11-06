@@ -21,7 +21,8 @@
 		DDDA10742917B1AC0048D6D9 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10732917B1AC0048D6D9 /* UserListViewModel.swift */; };
 		DDDA10772917B1DE0048D6D9 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10762917B1DE0048D6D9 /* UserDetailViewModel.swift */; };
 		DDDA10792917B3830048D6D9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10782917B3830048D6D9 /* APIService.swift */; };
-		DDDA107B2917B3A00048D6D9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA107A2917B3A00048D6D9 /* User.swift */; };
+		DDDA107B2917B3A00048D6D9 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA107A2917B3A00048D6D9 /* UserData.swift */; };
+		DDDA107D2917B89F0048D6D9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA107C2917B89F0048D6D9 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,8 @@
 		DDDA10732917B1AC0048D6D9 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		DDDA10762917B1DE0048D6D9 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
 		DDDA10782917B3830048D6D9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		DDDA107A2917B3A00048D6D9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DDDA107A2917B3A00048D6D9 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		DDDA107C2917B89F0048D6D9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +167,8 @@
 		DDDA106C2917AF560048D6D9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DDDA107A2917B3A00048D6D9 /* User.swift */,
+				DDDA107A2917B3A00048D6D9 /* UserData.swift */,
+				DDDA107C2917B89F0048D6D9 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,9 +324,10 @@
 				DDDA10772917B1DE0048D6D9 /* UserDetailViewModel.swift in Sources */,
 				DDDA103F2917AD290048D6D9 /* ViewController.swift in Sources */,
 				DDDA103B2917AD290048D6D9 /* AppDelegate.swift in Sources */,
-				DDDA107B2917B3A00048D6D9 /* User.swift in Sources */,
+				DDDA107B2917B3A00048D6D9 /* UserData.swift in Sources */,
 				DDDA103D2917AD290048D6D9 /* SceneDelegate.swift in Sources */,
 				DDDA10792917B3830048D6D9 /* APIService.swift in Sources */,
+				DDDA107D2917B89F0048D6D9 /* User.swift in Sources */,
 				DDDA10702917B0690048D6D9 /* UserListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
