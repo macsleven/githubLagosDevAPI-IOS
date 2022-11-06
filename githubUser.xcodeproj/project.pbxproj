@@ -16,6 +16,12 @@
 		DDDA10522917AD2D0048D6D9 /* githubUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10512917AD2D0048D6D9 /* githubUserTests.swift */; };
 		DDDA105C2917AD2D0048D6D9 /* githubUserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA105B2917AD2D0048D6D9 /* githubUserUITests.swift */; };
 		DDDA105E2917AD2D0048D6D9 /* githubUserUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA105D2917AD2D0048D6D9 /* githubUserUITestsLaunchTests.swift */; };
+		DDDA10702917B0690048D6D9 /* UserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA106F2917B0690048D6D9 /* UserListVC.swift */; };
+		DDDA10722917B14B0048D6D9 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10712917B14B0048D6D9 /* UserDetailsVC.swift */; };
+		DDDA10742917B1AC0048D6D9 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10732917B1AC0048D6D9 /* UserListViewModel.swift */; };
+		DDDA10772917B1DE0048D6D9 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10762917B1DE0048D6D9 /* UserDetailViewModel.swift */; };
+		DDDA10792917B3830048D6D9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10782917B3830048D6D9 /* APIService.swift */; };
+		DDDA107B2917B3A00048D6D9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA107A2917B3A00048D6D9 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		DDDA10572917AD2D0048D6D9 /* githubUserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = githubUserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDA105B2917AD2D0048D6D9 /* githubUserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = githubUserUITests.swift; sourceTree = "<group>"; };
 		DDDA105D2917AD2D0048D6D9 /* githubUserUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = githubUserUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DDDA106F2917B0690048D6D9 /* UserListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListVC.swift; sourceTree = "<group>"; };
+		DDDA10712917B14B0048D6D9 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
+		DDDA10732917B1AC0048D6D9 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
+		DDDA10762917B1DE0048D6D9 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
+		DDDA10782917B3830048D6D9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		DDDA107A2917B3A00048D6D9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +111,11 @@
 		DDDA10392917AD290048D6D9 /* githubUser */ = {
 			isa = PBXGroup;
 			children = (
+				DDDA106E2917AF7A0048D6D9 /* Utils */,
+				DDDA106D2917AF6C0048D6D9 /* Service */,
+				DDDA106C2917AF560048D6D9 /* Models */,
+				DDDA106B2917AF430048D6D9 /* ViewModels */,
+				DDDA106A2917AF330048D6D9 /* Views */,
 				DDDA103A2917AD290048D6D9 /* AppDelegate.swift */,
 				DDDA103C2917AD290048D6D9 /* SceneDelegate.swift */,
 				DDDA103E2917AD290048D6D9 /* ViewController.swift */,
@@ -125,6 +142,47 @@
 				DDDA105D2917AD2D0048D6D9 /* githubUserUITestsLaunchTests.swift */,
 			);
 			path = githubUserUITests;
+			sourceTree = "<group>";
+		};
+		DDDA106A2917AF330048D6D9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDDA106F2917B0690048D6D9 /* UserListVC.swift */,
+				DDDA10712917B14B0048D6D9 /* UserDetailsVC.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DDDA106B2917AF430048D6D9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DDDA10732917B1AC0048D6D9 /* UserListViewModel.swift */,
+				DDDA10762917B1DE0048D6D9 /* UserDetailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		DDDA106C2917AF560048D6D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DDDA107A2917B3A00048D6D9 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DDDA106D2917AF6C0048D6D9 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DDDA10782917B3830048D6D9 /* APIService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DDDA106E2917AF7A0048D6D9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +316,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDDA10722917B14B0048D6D9 /* UserDetailsVC.swift in Sources */,
+				DDDA10742917B1AC0048D6D9 /* UserListViewModel.swift in Sources */,
+				DDDA10772917B1DE0048D6D9 /* UserDetailViewModel.swift in Sources */,
 				DDDA103F2917AD290048D6D9 /* ViewController.swift in Sources */,
 				DDDA103B2917AD290048D6D9 /* AppDelegate.swift in Sources */,
+				DDDA107B2917B3A00048D6D9 /* User.swift in Sources */,
 				DDDA103D2917AD290048D6D9 /* SceneDelegate.swift in Sources */,
+				DDDA10792917B3830048D6D9 /* APIService.swift in Sources */,
+				DDDA10702917B0690048D6D9 /* UserListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -420,7 +484,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -445,6 +509,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -473,6 +538,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
