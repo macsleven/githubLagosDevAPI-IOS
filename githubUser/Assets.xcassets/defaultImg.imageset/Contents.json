@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "imageguide_man_blank.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

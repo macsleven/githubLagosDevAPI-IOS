@@ -23,6 +23,7 @@
 		DDDA10792917B3830048D6D9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA10782917B3830048D6D9 /* APIService.swift */; };
 		DDDA107B2917B3A00048D6D9 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA107A2917B3A00048D6D9 /* UserData.swift */; };
 		DDDA107D2917B89F0048D6D9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA107C2917B89F0048D6D9 /* User.swift */; };
+		DDDA10802917CDE00048D6D9 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA107F2917CDE00048D6D9 /* UserTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		DDDA10782917B3830048D6D9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DDDA107A2917B3A00048D6D9 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		DDDA107C2917B89F0048D6D9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DDDA107F2917CDE00048D6D9 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 		DDDA106A2917AF330048D6D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DDDA107E2917CDA70048D6D9 /* Cells */,
 				DDDA106F2917B0690048D6D9 /* UserListVC.swift */,
 				DDDA10712917B14B0048D6D9 /* UserDetailsVC.swift */,
 			);
@@ -186,6 +189,14 @@
 			children = (
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		DDDA107E2917CDA70048D6D9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DDDA107F2917CDE00048D6D9 /* UserTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +332,7 @@
 			files = (
 				DDDA10722917B14B0048D6D9 /* UserDetailsVC.swift in Sources */,
 				DDDA10742917B1AC0048D6D9 /* UserListViewModel.swift in Sources */,
+				DDDA10802917CDE00048D6D9 /* UserTableViewCell.swift in Sources */,
 				DDDA10772917B1DE0048D6D9 /* UserDetailViewModel.swift in Sources */,
 				DDDA103F2917AD290048D6D9 /* ViewController.swift in Sources */,
 				DDDA103B2917AD290048D6D9 /* AppDelegate.swift in Sources */,

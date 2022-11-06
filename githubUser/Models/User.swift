@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Codable, Comparable {
+    static func < (lhs: User, rhs: User) -> Bool {
+        lhs.name < rhs.name
+    }
+
     let id: Int
     let name: String
     let avatarUrl: String

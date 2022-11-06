@@ -13,7 +13,7 @@ struct UsersResponse : Codable {
     var incomplete_results: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case results = "results"
+        case results = "items"
         case total_count = "total_count"
         case incomplete_results = "incomplete_results"
     }
