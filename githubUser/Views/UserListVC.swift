@@ -39,13 +39,6 @@ class UserListVC: UIViewController {
         initVM()
     }
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        let realm = RealmService.shared.realm
-//        self.users = realm.objects(User.self)
-//        print(Realm.Configuration.defaultConfiguration)
-//    }
-    
     func showActivityIndicatory() {
         activityView = UIActivityIndicatorView(style: .medium)
         activityView.color = .black
@@ -62,6 +55,7 @@ class UserListVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshUserData(_:)), for: .valueChanged)
         tableView.dataSource = self
         tableView.delegate = self
+        self.title = "Lagos Dev"
         showActivityIndicatory()
     }
     

@@ -39,6 +39,7 @@ class UserTableViewCell: UITableViewCell {
         let imgView = UIImageView(image: UIImage(named: "defaultImg"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
+        imgView.layer.cornerRadius = 40
         return imgView
      }()
      
