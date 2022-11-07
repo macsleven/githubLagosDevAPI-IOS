@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class UserTableViewCell: UITableViewCell {
     
@@ -34,6 +35,11 @@ class UserTableViewCell: UITableViewCell {
         btn.imageView?.contentMode = .scaleAspectFill
         return btn
      }()
+    
+    private let favView: UIView = {
+        let fav = UIView()
+        return fav
+    }()
      
     private let avatarUrl : UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "defaultImg"))
@@ -48,6 +54,7 @@ class UserTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(avatarUrl)
         addSubview(name)
+        addSubview(favView)
      }
      
      required init?(coder aDecoder: NSCoder) {
@@ -70,7 +77,14 @@ class UserTableViewCell: UITableViewCell {
         name.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         name.leadingAnchor.constraint(equalTo: avatarUrl.trailingAnchor, constant: 20).isActive = true
         name.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+        name.trailingAnchor.constraint(equalTo: favView.leadingAnchor, constant: -12).isActive = true
+        
+        favView.translatesAutoresizingMaskIntoConstraints = false
+        favView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+       // favView.leadingAnchor.constraint(equalTo: name.trailingAnchor, constant: 20).isActive = true
+        favView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        favView.widthAnchor.constraint(equalToConstant: 2).isActive = true
+        favView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
     }
     
     
@@ -80,6 +94,13 @@ class UserTableViewCell: UITableViewCell {
         self.avatarUrl.image = PhotoTool.getImage(Name: id)
         if self.avatarUrl.image == nil {
             self.avatarUrl.downloadImageFrom(link: url, contentMode: UIView.ContentMode.scaleAspectFit, id: id)
+        }
+        let realm = try! Realm()
+        if realm.object(ofType: Favourite.self, forPrimaryKey: Int(id)) != nil {
+            self.favView.backgroundColor = .blue
+           
+        } else {
+            self.favView.backgroundColor = .white
         }
     }
 }

@@ -78,10 +78,12 @@ class UserListViewModel {
                 self?.isLoading = false
                 print("finished loading page \(self!.apiService.pagenumber)")
                 let realm = try! Realm()
+                let allUploadingObjects = realm.objects(User.self)
+                
                 do {
                     try realm.write {
-                        if !realm.isEmpty {
-                            realm.deleteAll()
+                        if !allUploadingObjects.isEmpty {
+                            realm.delete(allUploadingObjects)
                         }
                         for i in userDatas {
                             realm.add(i)

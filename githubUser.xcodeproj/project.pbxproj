@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		DD6D716A2918631E0030149E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6D71692918631E0030149E /* Utils.swift */; };
+		DDBC2F422919B34700710CB8 /* Favourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBC2F412919B34700710CB8 /* Favourite.swift */; };
+		DDCF02C42919E06C00147B47 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF02C32919E06C00147B47 /* CustomTabBarController.swift */; };
+		DDCF02C62919E74700147B47 /* FavouriteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF02C52919E74700147B47 /* FavouriteListVC.swift */; };
+		DDCF02C82919E9E000147B47 /* FavouriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF02C72919E9E000147B47 /* FavouriteListViewModel.swift */; };
 		DDDA103B2917AD290048D6D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA103A2917AD290048D6D9 /* AppDelegate.swift */; };
 		DDDA103D2917AD290048D6D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA103C2917AD290048D6D9 /* SceneDelegate.swift */; };
 		DDDA103F2917AD290048D6D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA103E2917AD290048D6D9 /* ViewController.swift */; };
@@ -48,6 +52,10 @@
 
 /* Begin PBXFileReference section */
 		DD6D71692918631E0030149E /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		DDBC2F412919B34700710CB8 /* Favourite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourite.swift; sourceTree = "<group>"; };
+		DDCF02C32919E06C00147B47 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		DDCF02C52919E74700147B47 /* FavouriteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteListVC.swift; sourceTree = "<group>"; };
+		DDCF02C72919E9E000147B47 /* FavouriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteListViewModel.swift; sourceTree = "<group>"; };
 		DDDA10372917AD290048D6D9 /* githubUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDA103A2917AD290048D6D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDDA103C2917AD290048D6D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +168,8 @@
 				DDDA107E2917CDA70048D6D9 /* Cells */,
 				DDDA106F2917B0690048D6D9 /* UserListVC.swift */,
 				DDDA10712917B14B0048D6D9 /* UserDetailsVC.swift */,
+				DDCF02C32919E06C00147B47 /* CustomTabBarController.swift */,
+				DDCF02C52919E74700147B47 /* FavouriteListVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,6 +179,7 @@
 			children = (
 				DDDA10732917B1AC0048D6D9 /* UserListViewModel.swift */,
 				DDDA10762917B1DE0048D6D9 /* UserDetailViewModel.swift */,
+				DDCF02C72919E9E000147B47 /* FavouriteListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 			children = (
 				DDDA107A2917B3A00048D6D9 /* UserData.swift */,
 				DDDA107C2917B89F0048D6D9 /* User.swift */,
+				DDBC2F412919B34700710CB8 /* Favourite.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -344,13 +356,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDBC2F422919B34700710CB8 /* Favourite.swift in Sources */,
 				DDDA10722917B14B0048D6D9 /* UserDetailsVC.swift in Sources */,
+				DDCF02C62919E74700147B47 /* FavouriteListVC.swift in Sources */,
 				DDDA10742917B1AC0048D6D9 /* UserListViewModel.swift in Sources */,
+				DDCF02C82919E9E000147B47 /* FavouriteListViewModel.swift in Sources */,
 				DDDA10802917CDE00048D6D9 /* UserTableViewCell.swift in Sources */,
 				DDDA10772917B1DE0048D6D9 /* UserDetailViewModel.swift in Sources */,
 				DDDA103F2917AD290048D6D9 /* ViewController.swift in Sources */,
 				DD6D716A2918631E0030149E /* Utils.swift in Sources */,
 				DDDA103B2917AD290048D6D9 /* AppDelegate.swift in Sources */,
+				DDCF02C42919E06C00147B47 /* CustomTabBarController.swift in Sources */,
 				DDDA107B2917B3A00048D6D9 /* UserData.swift in Sources */,
 				DDDA103D2917AD290048D6D9 /* SceneDelegate.swift in Sources */,
 				DDDA10792917B3830048D6D9 /* APIService.swift in Sources */,

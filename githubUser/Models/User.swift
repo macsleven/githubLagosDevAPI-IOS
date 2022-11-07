@@ -37,7 +37,7 @@ final class User: Object, Codable, Comparable {
     @objc dynamic var favorite  = false
     
     override static func primaryKey() -> String? {
-            return "id"
+        return "id"
     }
     
     enum CodingKeys: String, CodingKey {

@@ -1,14 +1,14 @@
 //
-//  UserListVC.swift
+//  FavouriteListVC.swift
 //  githubUser
 //
-//  Created by Suleiman Abubakar on 06/11/2022.
+//  Created by Suleiman Abubakar on 08/11/2022.
 //
 
 import UIKit
 import RealmSwift
 
-class UserListVC: UIViewController {
+class FavouriteListVC: UIViewController {
 
     var activityView = UIActivityIndicatorView()
     private let refreshControl = UIRefreshControl()
@@ -23,8 +23,8 @@ class UserListVC: UIViewController {
     
     var safeArea: UILayoutGuide!
     
-    lazy var viewModel: UserListViewModel = {
-        return UserListViewModel()
+    lazy var viewModel: FavouriteListViewModel = {
+        return FavouriteListViewModel()
     }()
     
     override func loadView() {
@@ -39,16 +39,17 @@ class UserListVC: UIViewController {
         initVM()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.refreshUserData(self)
+        isTrashEnable()
+    }
+    
     func showActivityIndicatory() {
         activityView = UIActivityIndicatorView(style: .medium)
         activityView.color = .black
         activityView.center = self.view.center
         self.view.addSubview(activityView)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tableView.reloadData()
     }
     
     //Mark: Setup View Methods
@@ -60,14 +61,39 @@ class UserListVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshUserData(_:)), for: .valueChanged)
         tableView.dataSource = self
         tableView.delegate = self
-        self.navigationItem.title = "Lagos Dev"
-        
+        self.navigationItem.title = "Favourite Dev"
+        let delete = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(addTapped))
+        navigationItem.rightBarButtonItem = delete
         showActivityIndicatory()
+    }
+    
+    @objc private func addTapped() {
+        print("tapping")
+        self.showAlert()
     }
     
     @objc private func refreshUserData(_ sender: Any) {
         self.refreshControl.endRefreshing()
         viewModel.initFetch()
+        
+    }
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: "Clear favourite?", message:"This action will clear all favourite", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: clearFavData))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+    }
+    
+    func clearFavData(alertAction: UIAlertAction) {
+        viewModel.clearFavDb()
+        isTrashEnable()
+        
+    }
+    
+    func isTrashEnable() {
+        navigationItem.rightBarButtonItem?.isEnabled = viewModel.numberOfCells > 0 ? true : false
     }
     
     fileprivate func setupTableViewConstraints() {
@@ -123,7 +149,7 @@ class UserListVC: UIViewController {
     }
 }
 
-extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+extension FavouriteListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -158,74 +184,33 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDe
        
     }
     
-    private func createSpinerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        return footerView
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if viewModel.apiService.isPaginating {
-            return
-        }
-       
-        let position = scrollView.contentOffset.y
-        if position > (tableView.contentSize.height-100 - scrollView.frame.size.height) {
-            if !viewModel.apiService.isPaginating && viewModel.apiService.incomplete_result && viewModel.apiService.pagenumber > 1  {
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
-                    self.tableView.tableFooterView = self.createSpinerFooter()
-                }
-                
-                DispatchQueue.global().asyncAfter(deadline: .now()) {
-                    self.viewModel.fetchMoreDate()
-                    DispatchQueue.main.async {
-                        self.tableView.tableFooterView = nil
-                    }
-                }
-            }
-        }
-    }
-    
-     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-         let realm = try! Realm()
-         let user = self.viewModel.getCellViewModel(section: self.viewModel.sectionLetters, listsection: indexPath.section, row: indexPath.row )
-         let saveAction = UIContextualAction(style: .destructive, title: "Save", handler: { (action, view, success) in
-          print("Saved")
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let realm = try! Realm()
+        let user = self.viewModel.getCellViewModel(section: self.viewModel.sectionLetters, listsection: indexPath.section, row: indexPath.row )
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, success) in
+          print("Delete")
             
              
-             if let specificPerson = realm.object(ofType: User.self, forPrimaryKey: user.id) {
-                 let fav = Favourite()
-                 fav.html_url = specificPerson.html_url
-                 fav.id = specificPerson.id
-                 fav.name = specificPerson.name
-                 fav.avatarUrl = specificPerson.avatarUrl
-                 fav.url = specificPerson.url
-                 
+             if let specificPerson = realm.object(ofType: Favourite.self, forPrimaryKey: user.id) {
+
                  do {
                      try realm.write {
-                         realm.add(fav)
-                         print("saving fav to db")
+                         realm.delete(specificPerson)
+                         print("deleting fav to db")
                      }
+                     self.viewModel.initFetch()
                  } catch {
                      print(error.localizedDescription)
                  }
+                 self.isTrashEnable()
              }
              
-          self.tableView.reloadData()
+          
              
          })
          
-        saveAction.backgroundColor = .blue
-         if realm.object(ofType: Favourite.self, forPrimaryKey: user.id) != nil {
-             print("found")
-             return UISwipeActionsConfiguration()
-         } else {
-             print("not found found")
-             return UISwipeActionsConfiguration(actions: [saveAction])
-         }
+        deleteAction.backgroundColor = .blue
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -240,5 +225,5 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDe
         
     }
 
-}
 
+}
