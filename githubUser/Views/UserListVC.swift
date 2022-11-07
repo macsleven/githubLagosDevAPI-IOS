@@ -176,7 +176,6 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDe
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100 - scrollView.frame.size.height) {
             if !viewModel.apiService.isPaginating && viewModel.apiService.incomplete_result && viewModel.apiService.pagenumber > 1  {
-                print("caling scroll function")
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
                     self.tableView.tableFooterView = self.createSpinerFooter()
                 }
@@ -192,6 +191,15 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UserDetailsVC()
+        let realm = try! Realm()
+        let user = self.viewModel.getCellViewModel(section: self.viewModel.sectionLetters, listsection: indexPath.section, row: indexPath.row )
+        let specificPerson = realm.object(ofType: User.self, forPrimaryKey: user.id)
+        vc.viewModel.user = specificPerson
+        DispatchQueue.main.async{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
 
 }

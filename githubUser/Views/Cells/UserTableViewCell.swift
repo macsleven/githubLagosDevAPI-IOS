@@ -47,8 +47,6 @@ class UserTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(avatarUrl)
         addSubview(name)
-     //addSubview(DescriptionLabel)
-     //addSubview(favButton)
      }
      
      required init?(coder aDecoder: NSCoder) {
