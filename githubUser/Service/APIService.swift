@@ -8,8 +8,10 @@
 import Foundation
 
 protocol APIServiceProtocol {
-    func fetchUsers( complete: @escaping ( _ success: Bool, _ userData: [User], _ error: Error? )->() )
-
+    func fetchUsers(pageNumber: Int , complete: @escaping ( _ success: Bool, _ userData: [User], _ error: Error? )->() )
+    var pagenumber: Int { get set }
+    var isPaginating: Bool { get set }
+    var incomplete_result: Bool { get set }
 }
 
 private let sessionManager: URLSession = {
@@ -18,12 +20,19 @@ private let sessionManager: URLSession = {
 }()
 
 class APIService: APIServiceProtocol {
+    var pagenumber: Int = 1
+    var incomplete_result = false
     
-    func fetchUsers( complete: @escaping ( _ success: Bool, _ userData: [User], _ error: Error? )->() )
+    var isPaginating = false
+    
+    func fetchUsers(pageNumber: Int, complete: @escaping ( _ success: Bool, _ userData: [User], _ error: Error? )->() )
     {
-        guard let composedUrl = URL(string: "https://api.github.com/search/users?q=lagos&page=1") else {
+        guard let composedUrl = URL(string: "https://api.github.com/search/users?q=lagos&page=\(pageNumber)") else {
             fatalError("Unable to build request url")
         }
+        
+        isPaginating = true
+        print(composedUrl)
         
         let request = URLRequest(url: composedUrl)
         
@@ -32,11 +41,18 @@ class APIService: APIServiceProtocol {
             guard error == nil else {
                 let exResult: [User] = []
                 complete( false,exResult, error )
+                self.isPaginating = false
                 return
             }
             
             let response = try? JSONDecoder().decode(UsersResponse.self, from: data!)
-            complete( true, (response?.results)!, nil )
+            self.incomplete_result = ((response?.incomplete_results) != nil)
+            let exResult: [User] = []
+            complete( true, response?.results ?? exResult, nil )
+            if response?.incomplete_results ?? false {
+                self.pagenumber += 1
+            }
+            self.isPaginating = false
         }.resume()
     }
     

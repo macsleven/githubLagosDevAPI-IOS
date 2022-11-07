@@ -17,6 +17,7 @@ class UserListVC: UIViewController {
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
+        
         return table
     }()
     
@@ -58,14 +59,13 @@ class UserListVC: UIViewController {
         // setup table view
         self.setupTableViewConstraints()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshRouteData(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshUserData(_:)), for: .valueChanged)
         tableView.dataSource = self
         tableView.delegate = self
         showActivityIndicatory()
-       // self.title = StringConstants.boundsDetails.route
     }
     
-    @objc private func refreshRouteData(_ sender: Any) {
+    @objc private func refreshUserData(_ sender: Any) {
         self.refreshControl.endRefreshing()
         viewModel.initFetch()
     }
@@ -113,7 +113,7 @@ class UserListVC: UIViewController {
             }
         }
         
-        viewModel.loadFromDb()
+        viewModel.initFetch()
         
     }
     
@@ -124,12 +124,12 @@ class UserListVC: UIViewController {
     }
 }
 
-extension UserListVC: UITableViewDelegate, UITableViewDataSource {
+extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath)
-        guard let customCell = cell as? UserTableViewCell else { fatalError("Unable to dequeue expected cell type: RouteTableViewCell") }
+        guard let customCell = cell as? UserTableViewCell else { fatalError("Unable to dequeue expected cell type: UserTableViewCell") }
         
         let cellVM = viewModel.getCellViewModel(section: viewModel.sectionLetters, listsection: indexPath.section, row: indexPath.row )
         customCell.setupView(name: cellVM.name, url: cellVM.avatar_url, id: "\(cellVM.id)")
@@ -159,8 +159,40 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource {
        
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    private func createSpinerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if viewModel.apiService.isPaginating {
+            return
+        }
+       
+        let position = scrollView.contentOffset.y
+        if position > (tableView.contentSize.height-100 - scrollView.frame.size.height) {
+            if !viewModel.apiService.isPaginating && viewModel.apiService.incomplete_result && viewModel.apiService.pagenumber > 1  {
+                print("caling scroll function")
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    self.tableView.tableFooterView = self.createSpinerFooter()
+                }
+                
+                DispatchQueue.global().asyncAfter(deadline: .now()) {
+                    self.viewModel.fetchMoreDate()
+                    DispatchQueue.main.async {
+                        self.tableView.tableFooterView = nil
+                    }
+                }
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+
 }
 
