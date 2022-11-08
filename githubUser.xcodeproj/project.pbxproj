@@ -12,6 +12,9 @@
 		DDCF02C42919E06C00147B47 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF02C32919E06C00147B47 /* CustomTabBarController.swift */; };
 		DDCF02C62919E74700147B47 /* FavouriteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF02C52919E74700147B47 /* FavouriteListVC.swift */; };
 		DDCF02C82919E9E000147B47 /* FavouriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF02C72919E9E000147B47 /* FavouriteListViewModel.swift */; };
+		DDCF02CA291A948000147B47 /* APIServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF02C9291A948000147B47 /* APIServiceTest.swift */; };
+		DDCF02CD291A97B700147B47 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DDCF02CC291A97B700147B47 /* Realm */; };
+		DDCF02CF291A97BC00147B47 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DDCF02CE291A97BC00147B47 /* RealmSwift */; };
 		DDDA103B2917AD290048D6D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA103A2917AD290048D6D9 /* AppDelegate.swift */; };
 		DDDA103D2917AD290048D6D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA103C2917AD290048D6D9 /* SceneDelegate.swift */; };
 		DDDA103F2917AD290048D6D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA103E2917AD290048D6D9 /* ViewController.swift */; };
@@ -56,6 +59,7 @@
 		DDCF02C32919E06C00147B47 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		DDCF02C52919E74700147B47 /* FavouriteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteListVC.swift; sourceTree = "<group>"; };
 		DDCF02C72919E9E000147B47 /* FavouriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteListViewModel.swift; sourceTree = "<group>"; };
+		DDCF02C9291A948000147B47 /* APIServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTest.swift; sourceTree = "<group>"; };
 		DDDA10372917AD290048D6D9 /* githubUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDA103A2917AD290048D6D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDDA103C2917AD290048D6D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCF02CF291A97BC00147B47 /* RealmSwift in Frameworks */,
+				DDCF02CD291A97B700147B47 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +112,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DDCF02CB291A97B700147B47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DDDA102E2917AD280048D6D9 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +126,7 @@
 				DDDA10502917AD2D0048D6D9 /* githubUserTests */,
 				DDDA105A2917AD2D0048D6D9 /* githubUserUITests */,
 				DDDA10382917AD290048D6D9 /* Products */,
+				DDCF02CB291A97B700147B47 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				DDDA10512917AD2D0048D6D9 /* githubUserTests.swift */,
+				DDCF02C9291A948000147B47 /* APIServiceTest.swift */,
 			);
 			path = githubUserTests;
 			sourceTree = "<group>";
@@ -256,6 +271,10 @@
 				DDDA104F2917AD2D0048D6D9 /* PBXTargetDependency */,
 			);
 			name = githubUserTests;
+			packageProductDependencies = (
+				DDCF02CC291A97B700147B47 /* Realm */,
+				DDCF02CE291A97BC00147B47 /* RealmSwift */,
+			);
 			productName = githubUserTests;
 			productReference = DDDA104D2917AD2D0048D6D9 /* githubUserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -379,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCF02CA291A948000147B47 /* APIServiceTest.swift in Sources */,
 				DDDA10522917AD2D0048D6D9 /* githubUserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,6 +748,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DDCF02CC291A97B700147B47 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDDA108629181D660048D6D9 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		DDCF02CE291A97BC00147B47 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDDA108629181D660048D6D9 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		DDDA108729181D660048D6D9 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DDDA108629181D660048D6D9 /* XCRemoteSwiftPackageReference "realm-swift" */;

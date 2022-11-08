@@ -113,7 +113,6 @@ class UserListVC: UIViewController {
             }
         }
         viewModel.initFetch()
-        
     }
     
     func showAlert( _ message: String ) {
@@ -190,40 +189,19 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDe
     }
     
      func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-         let realm = try! Realm()
+         
          let user = self.viewModel.getCellViewModel(section: self.viewModel.sectionLetters, listsection: indexPath.section, row: indexPath.row )
          let saveAction = UIContextualAction(style: .destructive, title: "Save", handler: { (action, view, success) in
-          print("Saved")
-            
-             
-             if let specificPerson = realm.object(ofType: User.self, forPrimaryKey: user.id) {
-                 let fav = Favourite()
-                 fav.html_url = specificPerson.html_url
-                 fav.id = specificPerson.id
-                 fav.name = specificPerson.name
-                 fav.avatarUrl = specificPerson.avatarUrl
-                 fav.url = specificPerson.url
-                 
-                 do {
-                     try realm.write {
-                         realm.add(fav)
-                         print("saving fav to db")
-                     }
-                 } catch {
-                     print(error.localizedDescription)
-                 }
-             }
-             
-          self.tableView.reloadData()
+             self.viewModel.saveToDB(userID: user.id)
+             self.tableView.reloadData()
              
          })
          
         saveAction.backgroundColor = .blue
+         let realm = try! Realm()
          if realm.object(ofType: Favourite.self, forPrimaryKey: user.id) != nil {
-             print("found")
              return UISwipeActionsConfiguration()
          } else {
-             print("not found found")
              return UISwipeActionsConfiguration(actions: [saveAction])
          }
     }
@@ -237,8 +215,6 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDe
         DispatchQueue.main.async{
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
-
 }
 

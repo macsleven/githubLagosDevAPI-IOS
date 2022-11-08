@@ -74,6 +74,25 @@ class FavouriteListViewModel {
         }
     }
     
+    func deleteFromDB(userID: Int) {
+        let realm = try! Realm()
+        if let specificPerson = realm.object(ofType: Favourite.self, forPrimaryKey: userID) {
+
+            do {
+                try realm.write {
+                    realm.delete(specificPerson)
+                }
+                if realm.object(ofType: User.self, forPrimaryKey: userID) != nil {
+                } else {
+                    PhotoTool.deleteImageDocumentDirectory(Name: "\(userID)")
+                }
+                self.initFetch()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func clearFavDb() {
         let realm = try! Realm()
         let allUploadingObjects = realm.objects(Favourite.self)
@@ -83,7 +102,12 @@ class FavouriteListViewModel {
                 if !allUploadingObjects.isEmpty {
                     realm.delete(allUploadingObjects)
                 }
-                print("calling init with loadDb")
+                for fav in allUploadingObjects {
+                    if realm.object(ofType: User.self, forPrimaryKey: fav.id) != nil {
+                    } else {
+                        PhotoTool.deleteImageDocumentDirectory(Name: "\(fav.id)")
+                    }
+                }
                 self.loadFromDb()
             }
             

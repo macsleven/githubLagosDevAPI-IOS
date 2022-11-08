@@ -177,36 +177,12 @@ extension FavouriteListVC: UITableViewDelegate, UITableViewDataSource, UIScrollV
         return viewModel.heightForRow
     }
     
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        
-       // self.viewModel.userPressed(at: indexPath)
-        return indexPath
-       
-    }
-    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let realm = try! Realm()
+        
         let user = self.viewModel.getCellViewModel(section: self.viewModel.sectionLetters, listsection: indexPath.section, row: indexPath.row )
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, success) in
-          print("Delete")
-            
-             
-             if let specificPerson = realm.object(ofType: Favourite.self, forPrimaryKey: user.id) {
-
-                 do {
-                     try realm.write {
-                         realm.delete(specificPerson)
-                         print("deleting fav to db")
-                     }
-                     self.viewModel.initFetch()
-                 } catch {
-                     print(error.localizedDescription)
-                 }
-                 self.isTrashEnable()
-             }
-             
-          
-             
+            self.viewModel.deleteFromDB(userID: user.id)
+            self.isTrashEnable()
          })
          
         deleteAction.backgroundColor = .blue

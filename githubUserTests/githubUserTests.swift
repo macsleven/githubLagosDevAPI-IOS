@@ -8,10 +8,13 @@
 import XCTest
 @testable import githubUser
 
+@testable import RealmSwift
+
 final class githubUserTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
     }
 
     override func tearDownWithError() throws {

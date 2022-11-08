@@ -87,9 +87,7 @@ class UserListViewModel {
                         }
                         for i in userDatas {
                             realm.add(i)
-                            print("writing to db \(i.name)")
                         }
-                        print("calling init with loadDb")
                         self?.loadFromDb()
                     }
                     
@@ -110,7 +108,6 @@ class UserListViewModel {
             } else {
                 self?.isLoading = false
                 let realm = try! Realm()
-                print("about to write\(UserDatas.count)")
                 do {
                     try realm.write {
                         for i in UserDatas {
@@ -132,14 +129,29 @@ class UserListViewModel {
             self.processFetchedRoutes(users: users.sorted(), complete: { allListData, listSections  in
                 self.cellViewModels = allListData
                 self.sections = listSections
-                print("user.count is \(users.count)")
                 self.apiService.pagenumber += 1
             })
         }
-//        else {
-//            print("calling init")
-//            self.initFetch()
-//        }
+    }
+    
+    func saveToDB(userID: Int) {
+        let realm = try! Realm()
+        if let specificPerson = realm.object(ofType: User.self, forPrimaryKey: userID) {
+            let fav = Favourite()
+            fav.html_url = specificPerson.html_url
+            fav.id = specificPerson.id
+            fav.name = specificPerson.name
+            fav.avatarUrl = specificPerson.avatarUrl
+            fav.url = specificPerson.url
+            
+            do {
+                try realm.write {
+                    realm.add(fav)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func getCellViewModel(section: [String], listsection : Int, row: Int ) -> UserListCellViewModel {
@@ -177,13 +189,6 @@ class UserListViewModel {
         self.sectionLetters = keys.sorted()
         complete(vms, sections)
     }
-}
-
-extension UserListViewModel {
-//    func userPressed( at indexPath: IndexPath ) {
-//        let route = self.allData[self.sections[indexPath.section]]![indexPath.row]
-//       // self.selectedRoute = AirlineDetailsViewModel(rides: route.routes!, routeLine: route.routeLine!)
-//    }
 }
 
 struct UserListCellViewModel {
